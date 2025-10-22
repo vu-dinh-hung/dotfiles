@@ -1,6 +1,7 @@
 set cursorline
 set number
 set ruler
+set mouse=a
 
 set expandtab
 set tabstop=4
