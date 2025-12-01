@@ -1,4 +1,6 @@
-source ~/dotfiles/minimal.sh
+source $HOME/dotfiles/minimal.sh
+
+bindkey \^U backward-kill-line
 
 # | yazi |------------------------------------------------------------------------------
 if command -v yazi >/dev/null 2>&1; then
