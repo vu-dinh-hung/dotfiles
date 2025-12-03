@@ -1,9 +1,13 @@
-This repo assumes it's cloned to the home directory i.e. to `~/dotfiles`
+This repo assumes it's cloned from the home directory i.e. to `~/dotfiles`
 
 ## Zsh
 
-Add to `~/.zshrc`:
+```
+echo "source ~/dotfiles/full.zsh" >> ~/.zshrc
+```
+
+## Vim
 
 ```
-source $HOME/dotfiles/full.zsh
+ln -s ~/dotfiles/.vim ~/.vim
 ```

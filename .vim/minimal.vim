@@ -1,9 +1,10 @@
-set cursorline
-set number
-set ruler
-
 set mouse=a
 set ttymouse=sgr
+
+syntax enable
+set number
+set ruler
+set cursorline
 
 set expandtab
 set tabstop=4
@@ -14,6 +15,8 @@ set incsearch
 set ignorecase
 set smartcase
 
-" Key mappings
+set clipboard=unnamed
+
+" Mappings
 vnoremap < <gv
 vnoremap > >gv
