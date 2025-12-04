@@ -1,4 +1,5 @@
 runtime minimal.vim
+runtime local.vim
 
 set foldmethod=marker
 set foldcolumn=1
