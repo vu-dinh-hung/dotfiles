@@ -1,5 +1,8 @@
-runtime minimal.vim
-runtime local.vim
+source ~/dotfiles/.vim/minimal.vim
 
 set foldmethod=marker
 set foldcolumn=1
+
+if filereadable("~/dotfiles/.vim/local.vim")
+    source ~/dotfiles/.vim/local.vim
+endif
