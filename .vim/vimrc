@@ -3,7 +3,3 @@ runtime local.vim
 
 set foldmethod=marker
 set foldcolumn=1
-
-call plug#begin()
-
-call plug#end()

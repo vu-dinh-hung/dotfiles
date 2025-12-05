@@ -1,3 +1,5 @@
+filetype plugin indent on
+
 set mouse=a
 set ttymouse=sgr
 
