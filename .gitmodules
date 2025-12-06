@@ -1,3 +1,0 @@
-[submodule ".vim/pack/langs/start/vlime"]
-	path = .vim/pack/langs/start/vlime
-	url = https://github.com/vlime/vlime.git
