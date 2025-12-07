@@ -20,5 +20,12 @@ set smartcase
 set clipboard=unnamed
 
 " Mappings
+map <SPACE> <Leader>
+
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 vnoremap < <gv
 vnoremap > >gv
