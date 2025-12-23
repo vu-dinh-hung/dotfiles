@@ -20,12 +20,10 @@ set smartcase
 set clipboard=unnamed
 
 " Mappings
-map <SPACE> <Leader>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>b :ls<cr>:b
 
 nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
 
 vnoremap < <gv
 vnoremap > >gv
