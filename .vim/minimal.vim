@@ -2,6 +2,7 @@ filetype plugin indent on
 
 set mouse=a
 set ttymouse=sgr
+set hidden
 
 syntax enable
 set number
@@ -20,12 +21,16 @@ set smartcase
 set clipboard=unnamed
 
 " Mappings
-map <SPACE> <Leader>
+let mapleader = ' '
+
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>b :ls!<cr>:b
+nnoremap <leader>qq :q<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>h :h  \| only<left><left><left><left><left><left><left>
+nnoremap <leader>tl :set number!<cr>
 
 nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
 
 vnoremap < <gv
 vnoremap > >gv
