@@ -1,17 +1,51 @@
-source ~/dotfiles/.vim/minimal.vim
+set mouse=a
+set ttymouse=sgr
+set hidden
+set clipboard=unnamed
+
+set number
+set ruler
+set cursorline
+syntax enable
+
+set expandtab
+set tabstop=4
+set shiftwidth=4
+
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
 
 set foldmethod=marker
 set foldcolumn=1
 
-" Plugins {{{
+" Mappings {{{1
+" --------
+let mapleader = ' '
+
+nnoremap ; :
+
+vnoremap < <gv
+vnoremap > >gv
+
+" Leader mappings
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>b :ls!<cr>:b
+nnoremap <leader>qq :q<cr>
+nnoremap <leader>w :w<cr>
+nnoremap <leader>h :h  \| only<left><left><left><left><left><left><left>
+nnoremap <leader>tl :set number!<cr>
+
+" Plugins {{{1
+" -------
 packadd! comment
 
 if has('python3')
     packadd! slimv
 endif
-
-filetype plugin indent on
 " }}}
+filetype plugin indent on
 
 if filereadable(expand('~/dotfiles/.vim/local.vim'))
     source ~/dotfiles/.vim/local.vim
