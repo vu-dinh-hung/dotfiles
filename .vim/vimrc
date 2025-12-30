@@ -3,6 +3,8 @@ set ttymouse=sgr
 set hidden
 set clipboard=unnamed
 
+colorscheme wildcharm
+set background=dark
 set number
 set ruler
 set cursorline
