@@ -35,6 +35,7 @@ vnoremap > >gv
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>b :ls!<cr>:b
 nnoremap <leader>qq :q<cr>
+nnoremap <leader>e :e<space>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>h :h  \| only<left><left><left><left><left><left><left>
 nnoremap <leader>tl :set number!<cr>
@@ -45,6 +46,7 @@ packadd! comment
 
 if has('python3')
     packadd! slimv
+    let g:paredit_leader = "\\"
 endif
 " }}}
 filetype plugin indent on
