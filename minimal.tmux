@@ -7,7 +7,7 @@ set -g mouse on
 # | Key mappings |--------------------------------------------------------------
 unbind C-b
 set -g prefix C-Space
-bind C-Space send-prefix
+bind C-b send-prefix  # allow repeated C-Space to still act as prefix key
 
 bind -n M-C-Left previous-window
 bind -n M-C-Right next-window
