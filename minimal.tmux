@@ -8,3 +8,6 @@ set -g mouse on
 unbind C-b
 set -g prefix C-Space
 bind C-Space send-prefix
+
+bind -n M-C-Left previous-window
+bind -n M-C-Right next-window
