@@ -10,6 +10,10 @@ set ruler
 set cursorline
 syntax enable
 
+set wildmenu
+set wildmode=list:longest,list:full
+set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
+
 set expandtab
 set tabstop=4
 set shiftwidth=4
