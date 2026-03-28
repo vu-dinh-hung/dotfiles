@@ -3,8 +3,13 @@ set ttymouse=sgr
 set hidden
 set clipboard=unnamed
 
-colorscheme wildcharm
 set background=dark
+try
+    colorscheme wildcharm
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme murphy
+endtry
+
 set number
 set ruler
 set cursorline
@@ -47,7 +52,7 @@ nnoremap <leader>tl :set number!<cr>
 
 " Plugins {{{1
 " -------
-packadd! comment
+silent! packadd! comment
 
 if has('python3')
     packadd! slimv
