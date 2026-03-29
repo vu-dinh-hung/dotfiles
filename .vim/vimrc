@@ -10,6 +10,15 @@ catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme murphy
 endtry
 
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set shortmess-=S
+
+set scrolloff=2
+set scroll=10
+
 set number
 set ruler
 set cursorline
@@ -22,12 +31,6 @@ set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
 set expandtab
 set tabstop=4
 set shiftwidth=4
-
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-set shortmess-=S
 
 set foldmethod=marker
 set foldcolumn=1
