@@ -4,6 +4,9 @@ set -s escape-time 10  # this is 10ms by default since tmux 3.5
 
 set -g mouse on
 
+# https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
+set -g default-terminal "tmux-256color"
+
 # | Key mappings |--------------------------------------------------------------
 unbind C-b
 set -g prefix C-Space
