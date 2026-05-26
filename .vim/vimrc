@@ -3,13 +3,6 @@ set ttymouse=sgr
 set hidden
 set clipboard=unnamed
 
-set background=dark
-try
-    colorscheme wildcharm
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme murphy
-endtry
-
 set hlsearch
 set incsearch
 set ignorecase
@@ -34,6 +27,17 @@ set shiftwidth=4
 
 set foldmethod=marker
 set foldcolumn=1
+
+" Colors {{{1
+try
+    colorscheme wildcharm
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme slate
+endtry
+
+if &t_Co == 16
+    highlight LineNr ctermfg=8
+endif
 
 " Mappings {{{1
 " --------
