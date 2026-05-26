@@ -1,3 +1,4 @@
+" General {{{1 ---------------------
 set mouse=a
 set ttymouse=sgr
 set hidden
@@ -28,7 +29,7 @@ set shiftwidth=4
 set foldmethod=marker
 set foldcolumn=1
 
-" Colors {{{1
+" Colors {{{1 ----------------------
 try
     colorscheme wildcharm
 catch /^Vim\%((\a\+)\)\=:E185/
@@ -39,16 +40,23 @@ if &t_Co == 16
     highlight LineNr ctermfg=8
 endif
 
-" Mappings {{{1
-" --------
-let mapleader = ' '
+" Plugins {{{1 ---------------------
+silent! packadd! comment
 
+if has('python3')
+    packadd! slimv
+    let g:paredit_leader = "\\"
+endif
+
+" Mappings {{{1 --------------------
 nnoremap ; :
 
 vnoremap < <gv
 vnoremap > >gv
 
 " Leader mappings
+let mapleader = ' '
+
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>b :ls!<cr>:b
 nnoremap <leader>qq :q<cr>
@@ -57,15 +65,8 @@ nnoremap <leader>w :w<cr>
 nnoremap <leader>h :h  \| only<left><left><left><left><left><left><left>
 nnoremap <leader>tl :set number!<cr>
 
-" Plugins {{{1
-" -------
-silent! packadd! comment
+" }}} ------------------------------
 
-if has('python3')
-    packadd! slimv
-    let g:paredit_leader = "\\"
-endif
-" }}}
 filetype plugin indent on
 
 if filereadable(expand('~/dotfiles/.vim/local.vim'))
