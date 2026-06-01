@@ -1,46 +1,37 @@
-" General {{{1 ---------------------
+let mapleader=' '
+map <Leader><Leader> <Leader>
+
+" General {{{1 ------------------------------
 set mouse=a
 set ttymouse=sgr
 set hidden
 set clipboard=unnamed
+set belloff=cursor,esc
 
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-set shortmess-=S
-
-set scrolloff=2
-set scroll=10
+set laststatus=2  " always show status line
+set wildmenu | set wildmode=list:longest,full
+set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
 
 set number
 set ruler
 set cursorline
-syntax enable
+set scrolloff=3
+set wrap | set linebreak | set breakindent  " wrap at word boundaries & preserve indent
 
-set wildmenu
-set wildmode=list:longest,list:full
-set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
+set hlsearch
+set incsearch
+set ignorecase | set smartcase
+set shortmess-=S  " show search count e.g. [1/10]
 
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set listchars=tab:»—,lead:·,trail:·
 
 set foldmethod=marker
 set foldcolumn=1
 
-" Colors {{{1 ----------------------
-try
-    colorscheme wildcharm
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme slate
-endtry
-
-if &t_Co == 16
-    highlight LineNr ctermfg=8
-endif
-
-" Plugins {{{1 ---------------------
+" Plugins {{{1 ------------------------------
 silent! packadd! comment
 
 if has('python3')
@@ -48,27 +39,50 @@ if has('python3')
     let g:paredit_leader = "\\"
 endif
 
-" Mappings {{{1 --------------------
+" Colors {{{1 -------------------------------
+try
+    color wildcharm | set bg=dark
+catch /^Vim\%((\a\+)\)\=:E185/
+    color slate
+endtry
+
+" Mappings {{{1 -----------------------------
 nnoremap ; :
 
 vnoremap < <gv
 vnoremap > >gv
 
-" Leader mappings
-let mapleader = ' '
+nnoremap j gj
+nnoremap k gk
 
-nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>b :ls!<cr>:b
-nnoremap <leader>qq :q<cr>
-nnoremap <leader>e :e<space>
-nnoremap <leader>w :w<cr>
-nnoremap <leader>h :h  \| only<left><left><left><left><left><left><left>
-nnoremap <leader>tl :set number!<cr>
+noremap <C-e> 3<C-e>
+noremap <C-y> 3<C-y>
 
-" }}} ------------------------------
+
+""" Exit & save
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>Q :q<CR>
+
+""" Buffers
+nnoremap <Leader>b :ls!<CR>:b
+nnoremap <Leader>e :e<Space>
+
+""" Misc
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <Leader>h :h  \| only<Left><Left><Left><Left><Left><Left><Left>
+nnoremap <Leader>tl :set number!<CR>
+
+" }}} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 filetype plugin indent on
+syntax enable
 
 if filereadable(expand('~/dotfiles/.vim/local.vim'))
     source ~/dotfiles/.vim/local.vim
+endif
+
+" Last {{{1 ---------------------------------
+if &t_Co == 16
+    highlight LineNr ctermfg=8  " Line numbers should be light gray
 endif
