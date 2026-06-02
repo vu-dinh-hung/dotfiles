@@ -73,6 +73,32 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 nnoremap <Leader>h :h  \| only<Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>tl :set number!<CR>
 
+" Terminal toggle {{{1 ----------------------
+let g:term_buf = 0
+function! ToggleTerminal()
+    if !bufexists(g:term_buf)
+        botright term ++kill=hup
+        let g:term_buf = bufnr('%')
+        return
+    endif
+
+    if bufwinnr(g:term_buf) > 0
+        execute bufwinnr(g:term_buf) . "hide"
+    else
+        execute "botright sbuf " . g:term_buf
+        execute bufwinnr(g:term_buf) . "wincmd w"
+        normal! i
+    endif
+endfunction
+
+augroup terminal
+    autocmd!
+    autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
+augroup END
+
+noremap <Leader>` :call ToggleTerminal()<CR>
+tnoremap <Leader>` <C-\><C-n>:call ToggleTerminal()<CR>
+
 " }}} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 filetype plugin indent on
