@@ -7,10 +7,13 @@ set ttymouse=sgr
 set hidden
 set clipboard=unnamed
 set belloff=cursor,esc
-
 set laststatus=2  " always show status line
-set wildmenu | set wildmode=list:longest,full
+
+set wildmenu | set wildmode=full:lastused  " last used order for buffer list
 set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
+set wildcharm=<Tab>  " allow tab for completion in mappings
+let g:netrw_liststyle=3
+let g:netrw_banner = 0
 
 set number
 set ruler
@@ -58,15 +61,14 @@ nnoremap k gk
 noremap <C-e> 3<C-e>
 noremap <C-y> 3<C-y>
 
-
 """ Exit & save
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>Q :q<CR>
 
-""" Buffers
-nnoremap <Leader>b :ls!<CR>:b
-nnoremap <Leader>e :e<Space>
+""" Buffers & file navigation
+nnoremap <Leader><Tab> :ls<CR>:b <Tab>
+nnoremap <silent> <Leader>b :20Lexplore<CR>
 
 """ Misc
 nnoremap <Leader>sv :source $MYVIMRC<CR>
@@ -112,3 +114,5 @@ endif
 if &t_Co == 16
     highlight LineNr ctermfg=8  " Line numbers should be light gray
 endif
+
+autocmd FileType setlocal nobuflisted
