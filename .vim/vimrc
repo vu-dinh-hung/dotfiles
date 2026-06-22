@@ -14,6 +14,7 @@ set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
 set wildcharm=<Tab>  " allow tab for completion in mappings
 let g:netrw_liststyle=3
 let g:netrw_banner = 0
+let g:netrw_browse_split = 4
 
 set number
 set ruler
@@ -34,6 +35,8 @@ set listchars=tab:»—,lead:·,trail:·
 set foldmethod=marker
 set foldcolumn=1
 
+autocmd FileType netrw setlocal nobuflisted bufhidden=wipe
+
 " Plugins {{{1 ------------------------------
 silent! packadd! comment
 
@@ -41,6 +44,8 @@ if has('python3')
     packadd! slimv
     let g:paredit_leader = "\\"
 endif
+
+let g:buftabline_indicators = 1
 
 " Colors {{{1 -------------------------------
 try
@@ -61,14 +66,18 @@ nnoremap k gk
 noremap <C-e> 3<C-e>
 noremap <C-y> 3<C-y>
 
-""" Exit & save
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>Q :q<CR>
+""" Exit (& save)
+nnoremap <Leader>q :qa<CR>
+nnoremap <Leader>Q :qa!<CR>
+nnoremap <Leader>w :bd<CR>
+nnoremap <Leader>s :w<CR>
+nnoremap <Leader>S :wa<CR>
 
 """ Buffers & file navigation
-nnoremap <Leader><Tab> :ls<CR>:b <Tab>
-nnoremap <silent> <Leader>b :20Lexplore<CR>
+nnoremap <expr> <Leader><Tab> (&winfixbuf ? "\<C-w>p" : '') .. ":b \<Tab>"
+nnoremap <expr> <Leader>] (&winfixbuf ? "\<C-w>p" : '') .. ":bnext\<CR>"
+nnoremap <expr> <Leader>[ (&winfixbuf ? "\<C-w>p" : '') .. ":bprev\<CR>"
+nnoremap <silent> <C-b> :20Lexplore<CR>
 
 """ Misc
 nnoremap <Leader>sv :source $MYVIMRC<CR>
@@ -95,7 +104,7 @@ endfunction
 
 augroup terminal
     autocmd!
-    autocmd TerminalOpen * setlocal nonumber norelativenumber foldcolumn=0
+    autocmd TerminalOpen * setlocal nobuflisted nonumber norelativenumber foldcolumn=0 winfixbuf
 augroup END
 
 noremap <Leader>` :call ToggleTerminal()<CR>
@@ -114,5 +123,3 @@ endif
 if &t_Co == 16
     highlight LineNr ctermfg=8  " Line numbers should be light gray
 endif
-
-autocmd FileType setlocal nobuflisted
