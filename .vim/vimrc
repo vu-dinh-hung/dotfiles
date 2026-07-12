@@ -12,7 +12,7 @@ set laststatus=2  " always show status line
 set wildmenu | set wildmode=full:lastused  " last used order for buffer list
 set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
 set wildcharm=<Tab>  " allow tab for completion in mappings
-let g:netrw_liststyle=3
+let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 
@@ -83,14 +83,18 @@ nnoremap <Leader>S :wa<CR>
 nnoremap <expr> <Leader><Tab> (&winfixbuf ? "\<C-w>p" : '') .. ":b \<Tab>"
 nnoremap <expr> <Leader>] (&winfixbuf ? "\<C-w>p" : '') .. ":bnext\<CR>"
 nnoremap <expr> <Leader>[ (&winfixbuf ? "\<C-w>p" : '') .. ":bprev\<CR>"
+
+" Drawers {{{1 ------------------------------
 nnoremap <silent> <C-b> :call ToggleLexplore()<CR>
 tnoremap <silent> <C-b> <C-\><C-n>:call ToggleLexplore()<CR>
+
+let g:lexplore_width = 20  " defaults to 20% screen width
 function! ToggleLexplore()
     if exists('g:terminal_drawer_bufnr') && bufwinnr(g:terminal_drawer_bufnr) > 0
-        "" Close terminal drawer if it's open -- helps avoid edge cases
+        "" Close terminal drawer before opening explorer  -- helps avoid edge cases
         call ToggleTerminal()
     endif
-    20Lexplore
+    execute g:lexplore_width . 'Lexplore'
 endfunction
 
 """ Terminal toggle
