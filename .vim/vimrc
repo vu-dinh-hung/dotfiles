@@ -35,14 +35,20 @@ set listchars=tab:»—,lead:·,trail:·
 set foldmethod=marker
 set foldcolumn=1
 
-autocmd FileType netrw setlocal nobuflisted bufhidden=wipe
+augroup vimrc
+    autocmd!
+    autocmd FileType netrw setlocal nobuflisted bufhidden=wipe
+    autocmd User TerminalDrawerOpenPre
+        \ if exists('t:netrw_lexbufnr') && bufwinnr(t:netrw_lexbufnr) > 0 | Lexplore | endif
+    autocmd WinEnter * if winnr('$') == 1 && &filetype ==# 'netrw' | quit | endif
+augroup END
 
 " Plugins {{{1 ------------------------------
 silent! packadd! comment
 
 if has('python3')
     packadd! slimv
-    let g:paredit_leader = "\\"
+    let g:paredit_leader = '\'
 endif
 
 let g:buftabline_indicators = 1
@@ -63,8 +69,8 @@ vnoremap > >gv
 nnoremap j gj
 nnoremap k gk
 
-noremap <C-e> 3<C-e>
-noremap <C-y> 3<C-y>
+noremap <C-e> <C-e><C-e><C-e>
+noremap <C-y> <C-y><C-y><C-y>
 
 """ Exit (& save)
 nnoremap <Leader>q :qa<CR>
@@ -77,38 +83,25 @@ nnoremap <Leader>S :wa<CR>
 nnoremap <expr> <Leader><Tab> (&winfixbuf ? "\<C-w>p" : '') .. ":b \<Tab>"
 nnoremap <expr> <Leader>] (&winfixbuf ? "\<C-w>p" : '') .. ":bnext\<CR>"
 nnoremap <expr> <Leader>[ (&winfixbuf ? "\<C-w>p" : '') .. ":bprev\<CR>"
-nnoremap <silent> <C-b> :20Lexplore<CR>
+nnoremap <silent> <C-b> :call ToggleLexplore()<CR>
+tnoremap <silent> <C-b> <C-\><C-n>:call ToggleLexplore()<CR>
+function! ToggleLexplore()
+    if exists('g:terminal_drawer_bufnr') && bufwinnr(g:terminal_drawer_bufnr) > 0
+        "" Close terminal drawer if it's open -- helps avoid edge cases
+        call ToggleTerminal()
+    endif
+    20Lexplore
+endfunction
+
+""" Terminal toggle
+map <C-`> <Plug>(toggle-terminal)
+tmap <C-`> <Plug>(toggle-terminal)
+imap <C-`> <Plug>(toggle-terminal)
 
 """ Misc
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 nnoremap <Leader>h :h  \| only<Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>tl :set number!<CR>
-
-" Terminal toggle {{{1 ----------------------
-let g:term_buf = 0
-function! ToggleTerminal()
-    if !bufexists(g:term_buf)
-        botright term ++kill=hup
-        let g:term_buf = bufnr('%')
-        return
-    endif
-
-    if bufwinnr(g:term_buf) > 0
-        execute bufwinnr(g:term_buf) . "hide"
-    else
-        execute "botright sbuf " . g:term_buf
-        execute bufwinnr(g:term_buf) . "wincmd w"
-        normal! i
-    endif
-endfunction
-
-augroup terminal
-    autocmd!
-    autocmd TerminalOpen * setlocal nobuflisted nonumber norelativenumber foldcolumn=0 winfixbuf
-augroup END
-
-noremap <Leader>` :call ToggleTerminal()<CR>
-tnoremap <Leader>` <C-\><C-n>:call ToggleTerminal()<CR>
 
 " }}} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
