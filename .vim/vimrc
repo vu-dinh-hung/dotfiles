@@ -53,6 +53,13 @@ endif
 
 let g:buftabline_indicators = 1
 
+"" Ale
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   '*':       ['remove_trailing_lines', 'trim_whitespace'],
+\   'haskell': ['fourmolu'],
+\}
+
 " Colors {{{1 -------------------------------
 try
     color wildcharm | set bg=dark
@@ -106,6 +113,13 @@ imap <C-`> <Plug>(toggle-terminal)
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 nnoremap <Leader>h :h  \| only<Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>tl :set number!<CR>
+
+" Indents {{{1 ------------------------------
+augroup filetype_indents
+    autocmd!
+    autocmd FileType haskell setlocal expandtab shiftwidth=2 softtabstop=2
+    autocmd FileType go      setlocal noexpandtab
+augroup END
 
 " }}} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
