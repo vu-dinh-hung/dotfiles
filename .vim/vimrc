@@ -8,6 +8,7 @@ set hidden
 set clipboard=unnamed
 set belloff=cursor,esc
 set laststatus=2  " always show status line
+set ttimeoutlen=100  " wait only 100ms after Esc
 
 set wildmenu | set wildmode=full:lastused  " last used order for buffer list
 set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
@@ -102,8 +103,6 @@ tmap <C-`> <Plug>(toggle-terminal)
 imap <C-`> <Plug>(toggle-terminal)
 
 """ Misc
-nnoremap <Leader>sv :source $MYVIMRC<CR>
-nnoremap <Leader>h :h  \| only<Left><Left><Left><Left><Left><Left><Left>
 nnoremap <Leader>tl :set number!<CR>
 
 " Indents {{{1 ------------------------------
