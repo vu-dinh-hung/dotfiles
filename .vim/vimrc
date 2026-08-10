@@ -9,6 +9,7 @@ set clipboard=unnamed
 set belloff=cursor,esc
 set laststatus=2  " always show status line
 set ttimeoutlen=100  " wait only 100ms after Esc
+set updatetime=100
 
 set wildmenu | set wildmode=full:lastused  " last used order for buffer list
 set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
@@ -24,6 +25,9 @@ set cursorline
 set scrolloff=3
 set wrap | set linebreak | set breakindent  " wrap at word boundaries & preserve indent
 
+set foldmethod=marker
+set foldcolumn=1
+
 set hlsearch
 set incsearch
 set ignorecase | set smartcase
@@ -33,9 +37,6 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set listchars=tab:»—,lead:·,trail:·
-
-set foldmethod=marker
-set foldcolumn=1
 
 augroup vimrc
     autocmd!
@@ -62,7 +63,22 @@ let g:ale_fixers = {
 \   'haskell': ['fourmolu'],
 \}
 
+"" vim-gitgutter
+let g:gitgutter_preview_win_floating = 1
+
 " Colors {{{1 -------------------------------
+augroup vimrc_colors
+    autocmd!
+    autocmd ColorScheme *
+        \ highlight GitGutterAdd    ctermfg=darkgreen  guifg=#009900 |
+        \ highlight GitGutterChange ctermfg=darkyellow guifg=#bbbb00 |
+        \ highlight GitGutterDelete ctermfg=darkred    guifg=#ff2222 |
+        \
+        \ highlight GitGutterAddLineNr    ctermfg=darkgreen  guifg=#009900 |
+        \ highlight GitGutterChangeLineNr ctermfg=darkyellow guifg=#bbbb00 |
+        \ highlight GitGutterDeleteLineNr ctermfg=darkred    guifg=#ff2222
+augroup END
+
 try
     color wildcharm | set bg=dark
 catch /^Vim\%((\a\+)\)\=:E185/
