@@ -7,8 +7,8 @@ set ttymouse=sgr
 set hidden
 set clipboard=unnamed
 set belloff=cursor,esc
-set laststatus=2  " always show status line
 set ttimeoutlen=100  " wait only 100ms after Esc
+set updatetime=100
 
 set wildmenu | set wildmode=full:lastused  " last used order for buffer list
 set wildignore=*.jpg,*.png,*.gif,*.pdf,*.docx,*.xlsx
@@ -18,11 +18,14 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 
-set number
+set laststatus=2  " always show status line
 set ruler
-set cursorline
-set scrolloff=3
-set wrap | set linebreak | set breakindent  " wrap at word boundaries & preserve indent
+
+set number
+set signcolumn=yes
+set foldcolumn=1
+
+set foldmethod=marker
 
 set hlsearch
 set incsearch
@@ -32,10 +35,10 @@ set shortmess-=S  " show search count e.g. [1/10]
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set scrolloff=2
+set cursorline
+set wrap | set linebreak | set breakindent  " wrap at word boundaries & preserve indent
 set listchars=tab:»—,lead:·,trail:·
-
-set foldmethod=marker
-set foldcolumn=1
 
 augroup vimrc
     autocmd!
@@ -62,7 +65,25 @@ let g:ale_fixers = {
 \   'haskell': ['fourmolu'],
 \}
 
+"" vim-gitgutter
+let g:gitgutter_preview_win_floating = 1
+let g:gitgutter_sign_added = '│'
+let g:gitgutter_sign_modified = '│'
+let g:gitgutter_sign_modified_removed = '│'
+
 " Colors {{{1 -------------------------------
+augroup vimrc_colors
+    autocmd!
+    autocmd ColorScheme *
+        \ highlight GitGutterAdd    ctermfg=darkgreen guifg=#009900 |
+        \ highlight GitGutterChange ctermfg=darkblue  guifg=#1b81a8 |
+        \ highlight GitGutterDelete ctermfg=darkred   guifg=#ff2222 |
+        \
+        \ highlight GitGutterAddLineNr    ctermfg=darkgreen  guifg=#009900 |
+        \ highlight GitGutterChangeLineNr ctermfg=darkyellow guifg=#bbbb00 |
+        \ highlight GitGutterDeleteLineNr ctermfg=darkred    guifg=#ff2222
+augroup END
+
 try
     color wildcharm | set bg=dark
 catch /^Vim\%((\a\+)\)\=:E185/
