@@ -1,4 +1,8 @@
-# ohmyzsh-like git aliases
+alias l='ls -laFh'
+alias ll='ls -lFh'
+
+alias t='tmux new -A -s'
+
 alias g='git'
 alias ga='git add'
 alias gaa='git add --all'
